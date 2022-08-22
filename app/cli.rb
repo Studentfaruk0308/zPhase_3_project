@@ -61,8 +61,6 @@ class CLI
         when '5'
             puts "There are total #{Student.count} students in the Database"   
         end
-        puts "Do you want to continue (Y/N)?"
-        continue = gets.strip
 
     end
 
@@ -212,6 +210,149 @@ class CLI
         delete_Student.destroy
 
         puts "Student with id #{delete_student_id} deleted from the Database"
+
+    end
+
+    def teacherMenu
+        puts "What would you like to do?"
+        puts "Select one of the following options from 1 to 5"
+        puts "1. Create a Teacher Data"
+        puts "2. List All Teachers"
+        puts "3. Update a Teacher Data"
+        puts "4. Delete a Teacher Data"
+        puts "5. Total Number of Teachers"
+
+        input = gets.strip
+
+        case input
+        when '1'
+            new_teacher_entry_menu
+        when '2'
+            puts Teacher.all
+        when '3'
+            update_teacher_menu
+        when '4'
+            delete_a_teacher_menu
+        when '5'
+            puts "There are total #{Teacher.count} Teachers in the Database"   
+        end
+
+    end
+
+    def new_teacher_entry_menu
+
+        puts "Creating a new Teacher in Database"
+        puts ""
+        puts "Please type the particulars of new Teacher as asked in sequence"
+        puts ""
+        puts "Please type the Code for new Teacher"
+        new_teacher_code = gets.strip
+
+        puts "Please type the Name of new Teacher"
+        new_teacher_name = gets.strip
+
+        puts "Please type the Email ID of new Teacher"
+        new_teacher_email_id = gets.strip
+
+        puts "Please type the home address of new 
+        Teacher"
+        new_teacher_home_address = gets.strip
+
+        puts "Please type the mobile number of new Teacher"
+        new_teacher_mobile_number = gets.strip
+
+        puts "Please type the gender of new Teacher"
+        new_teacher_gender = gets.strip
+
+        puts "Please type the engagement date of new Teacher"
+        new_teacher_engagement_date = gets.strip
+
+        puts "Please type the bank details of new Teacher"
+        new_teacher_bank_details = gets.strip
+
+        puts "Please type the salary ID of new Teacher"
+        new_teacher_salary_id = gets.strip
+
+        Teacher.create(
+            teacher_code: new_teacher_code,
+            teacher_name: new_teacher_name,
+            email_id: new_teacher_email_id,
+            home_address: new_teacher_home_address,
+            mobile_number: new_teacher_mobile_number,
+            gender: new_teacher_gender,
+            engagement_date: new_teacher_engagement_date,
+            bank_details: new_teacher_bank_details,
+            salary_id: new_teacher_salary_id
+        )
+
+        puts "A new Teacher created with the data you have provided"
+        puts "Thank You"
+    end
+
+    def update_a_teacher_menu
+        puts "Updating a Teacher in the Database"
+        puts ""
+        
+        puts "Please type the Teacher id which to be updated"
+        update_teacher_id = gets.strip
+
+        update_teacher = Teacher.find_by(id: update_teacher_id)
+        puts "Teacher #{update_teacher_id} will be updated in next few steps"
+
+        puts "Please type the new Code of the Teacher"
+        update_teacher_code = gets.strip
+
+        puts "Please type the new Name of the Teacher"
+        update_teacher_name = gets.strip
+
+        puts "Please type the new Email ID of the Teacher"
+        update_teacher_email_id = gets.strip
+
+        puts "Please type the new home address of the
+        Teacher"
+        update_teacher_home_address = gets.strip
+
+        puts "Please type the new mobile number of the Teacher"
+        update_teacher_mobile_number = gets.strip
+
+        puts "Please input the correct gender of the Teacher"
+        update_teacher_gender = gets.strip
+
+        puts "Please type the new engagement date of the Teacher"
+        update_teacher_engagement_date = gets.strip
+
+        puts "Please type the new bank details of the Teacher"
+        update_teacher_bank_details = gets.strip
+
+        puts "Please type the new salary ID of the Teacher"
+        update_teacher_salary_id = gets.strip
+
+        Teacher.update(
+            teacher_code: update_teacher_code,
+            teacher_name: update_teacher_name,
+            email_id: update_teacher_email_id,
+            home_address: update_teacher_home_address,
+            mobile_number: update_teacher_mobile_number,
+            gender: update_teacher_gender,
+            engagement_date: update_teacher_engagement_date,
+            bank_details: update_teacher_bank_details,
+            salary_id: update_teacher_salary_id
+        )
+
+        puts "Teacher with id #{update_teacher_id} updated in the Database"
+    end
+
+    def delete_a_teacher_menu
+        puts "Deleting a Teacher from Database"
+        puts ""
+        
+        puts "Please type the Teacher id which to be deleted from Database"
+        delete_teacher_id = gets.strip
+
+        delete_Teacher = Teacher.find_by(id: delete_teacher_id)
+        delete_Teacher.destroy
+
+        puts "Teacher with id #{delete_teacher_id} deleted from the Database"
 
     end
 
