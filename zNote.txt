@@ -1,0 +1,424 @@
+! ("single-bang") which represents "NOT",
+&& ("double-ampersand") which represents "AND", and
+|| ("double-pipe") which represents "OR".
+
+age = 1
+age < 2 ? "baby" : "not a baby"
+conditional ? action_if_true : action_if_false
+
+name = "Alice"
+if name == "Alice"
+  puts "Hello, Alice!"
+elsif name == "The White Rabbit"
+  puts "Don't be late, White Rabbit"
+elsif name == "The Mad Hatter"
+  puts "Welcome to the tea party, Mad Hatter"
+elsif name == "The Queen of Hearts"
+  puts "Please don't chop off my head!"
+else
+  puts "Whoooo are you?"
+end 
+
+case name 
+
+  when "Alice"
+    puts "Hello, Alice!"
+  when "The White Rabbit"
+    puts "Don't be late, White Rabbit"
+  when "The Mad Hatter"
+    puts "Welcome to the tea party, Mad Hatter"
+  when "The Queen of Hearts"
+    puts "Please don't chop off my head!"
+  else 
+    puts "Whoooo are you?"
+end
+
+def hamburger(toppings)
+  my_statements = []
+  toppings.each do |topping|
+    my_statements << "I love #{topping} on my burgers!"
+  end
+  my_statements
+end
+
+toppings = ["pickles", "mushrooms", "bacon"]
+
+def hamburger(toppings)
+  toppings.map do |topping|
+    puts "I love #{topping} on my burgers!"
+  end
+end
+
+If you want the transformations to be reflected in the return value use map or collect.
+If you want to return the original return value use each.
+
+Datatype
+TEXT = Plain Text, email, height, weight, age
+INTEGER = Whole number, 
+REAL = Number with decimal point
+BLOB = Binary datatype
+
+==================
+
+Calculator.rb
+
+class Calculator
+    def calculate(firstNumber, secondNumber, operator)
+        case operator
+        when '+'
+            return Integer(firstNumber) + Integer(secondNumber)
+        when'-'
+            return Integer(firstNumber) - Integer(secondNumber)
+        when'*'
+            return Integer(firstNumber) * Integer(secondNumber)
+        when'/'
+            return Integer(firstNumber) / Integer(secondNumber)
+        end
+    end
+end
+
+===========
+
+cli.rb
+
+class CLI 
+    def initialize
+        continue = 'Y'
+        puts "Welcome to my CLI application"  
+        while continue == 'Y'
+     puts "What would you like to do?"
+     puts "1. Calculator"
+     puts "2. User"
+
+     input = gets.strip
+
+     if input == '1'
+        startCalculator
+     else
+        getUsers
+    end
+    puts "Do you want to continue (Y/N)?"
+    continue = gets.strip
+    end
+end
+
+    def startCalculator
+        puts "Input first number"
+        inputOne = gets.strip
+        puts "Input second number"
+        inputTwo = gets.strip
+        puts "Input an operator (+,-,*,/)"
+        operator = gets.strip
+      
+        result = Calculator.new.calculate(inputOne, inputTwo, operator)
+
+        puts result
+    end
+
+    def getUsers
+        puts "What information do you like to know?"
+        puts "1. Number of Users"
+        puts "2. Search User by name"
+        puts "3. Insert to DB"
+        input = gets.strip
+
+        if input == "1"
+            puts User.count
+        elsif input == "2"
+            puts "Type a name"
+            value = gets.strip
+            puts User.find_by(name: value)
+        elsif input == "3"
+            programs = GetPrograms.new.program_school
+            programs.each do |program|
+            User.create({name: program})
+            end  
+        end
+    end
+    
+end
+
+==========
+
+API Fetching
+
+require 'net/http'
+require 'open-uri'
+require 'json'
+ 
+ class GetPrograms
+
+  URL = "http://data.cityofnewyork.us/resource/uvks-tn5n.json"
+
+  def get_programs
+    uri = URI.parse(URL)
+    response = Net::HTTP.get_response(uri)
+    response.body
+  end
+
+  def program_school
+      programs = JSON.parse(self.get_programs)
+      programs.collect do |program|
+        program["agency"]  
+      end
+    end
+
+    def program_type
+      programs = JSON.parse(self.get_programs)
+      programs.collect do |program|
+        program["program_type"]  
+      end
+    end
+
+    def site_name
+      programs = JSON.parse(self.get_programs)
+      programs.collect do |program|
+        program["site_name"]  
+      end
+    end
+
+end
+
+#  programs = GetPrograms.new.get_programs
+#  puts programs
+
+# programs = GetPrograms.new
+# puts programs.program_school.uniq
+
+# programs = GetPrograms.new
+# puts programs.program_type.uniq
+
+programs = GetPrograms.new
+puts programs.site_name.uniq
+
+========
+
+SAVING NEW DATA IN DB
+class Cat
+
+  @@all = []
+
+  def initialize(name, breed, age)
+    @name = name
+    @breed = breed
+    @age = age
+    @@all << self
+  end
+
+  def self.all
+    @@all
+  end
+
+  def self.save(name, breed, age, database_connection)
+    database_connection.execute("INSERT INTO cats (name, breed, age) VALUES (?, ?, ?)",name, breed, age)
+  end
+end
+
+database_connection = SQLite3::Database.new('db/pets.db')
+
+Cat.new("Maru", "scottish fold", 3)
+Cat.new("Hana", "tortoiseshell", 1)
+
+Cat.all.each do |cat|
+  Cat.save(cat.name, cat.breed, cat.age, database_connection)
+end
+
+==========
+FOR database_connection in config/environment.rb
+
+
+require 'sqlite3'
+require_relative '../lib/song.rb'
+
+DB = {:conn => SQLite3::Database.new("db/music.db")}
+
+DB[:conn]
+
+==============
+class Student
+  attr_accessor :name, :grade
+  attr_reader :id
+  
+  @@all = []
+ 
+def initialize(name, grade, id=nil)
+@id=id
+@name=name
+@grade=grade
+@@all << self
+end
+
+def self.all
+  @@all
+end
+
+def self.create_table()
+  sql = <<-SQL
+  CREATE TABLE IF NOT EXISTS students(
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    grade TEXT
+  )
+  SQL
+  DB[:conn].execute(sql)
+end
+
+def self.drop_table
+  sql = "DROP TABLE IF EXISTS students"
+  DB[:conn].execute(sql)
+  # DB[:conn].execute("DROP TABLE IF EXISTS students")
+end
+
+def save
+  sql = <<-SQL
+  INSERT INTO students(name, grade)
+  VALUES (?, ?)
+  SQL
+  DB[:conn].execute(sql, self.name, self.grade)
+  # DB[:conn].execute("INSERT INTO students (name, grade) VALUES (?, ?)", self.name, self.grade)
+  @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
+end
+
+def self.create(name:, grade:)
+  student = Student.new(name, grade)
+  student.save
+  student
+end
+
+end
+
+Student.create_table;
+Student.create({name: "New Student", grade: "New grade"});
+
+=============
+
+require 'bundler'
+Bundler.require
+
+require_relative '../lib/student'
+
+DB = {:conn => SQLite3::Database.new("db/students.db")}
+
+==============
+
+DB TO RUBY OBJECT
+
+class Student
+  attr_accessor :id, :name, :grade
+
+  def self.new_from_db(row)
+    new_student = self.new
+    new_student.id = row[0]
+    new_student.name =  row[1]
+    new_student.grade = row[2]
+    new_student  # return the newly created instance
+  end
+
+  def self.all
+    sql = <<-SQL
+    SELECT * FROM students
+    SQL
+    DB[:conn].execute(sql).map do |row|
+        self.new_from_db(row)
+    end
+  end
+
+  def self.find_by_name(name)
+    sql = <<-SQL
+      SELECT *
+      FROM students
+      WHERE name = ?
+      LIMIT 1
+    SQL
+
+    DB[:conn].execute(sql, name).map do |row|
+      self.new_from_db(row)
+    end.first
+end
+
+  def save
+    sql = <<-SQL
+      INSERT INTO students (name, grade) 
+      VALUES (?, ?)
+    SQL
+
+    DB[:conn].execute(sql, self.name, self.grade)
+  end
+  
+  def self.create_table
+    sql = <<-SQL
+    CREATE TABLE IF NOT EXISTS students (
+      id INTEGER PRIMARY KEY,
+      name TEXT,
+      grade TEXT
+    )
+    SQL
+
+    DB[:conn].execute(sql)
+  end
+
+  def self.drop_table
+    sql = "DROP TABLE IF EXISTS students"
+    DB[:conn].execute(sql)
+  end
+
+def self.all_students_in_grade_9
+  sql = <<-SQL
+  SELECT COUNT (*) FROM students WHERE grade = 9
+  SQL
+  DB[:conn].execute(sql).map do |row|
+      self.new_from_db(row)
+  end
+end 
+
+def self.students_below_12th_grade
+sql = <<-SQL
+SELECT * FROM students WHERE grade < 12
+SQL
+DB[:conn].execute(sql).map do |row|
+  self.new_from_db(row)
+end
+end
+
+def self.first_X_students_in_grade_10(x)
+  sql = <<-SQL
+  SELECT *
+  FROM students
+  WHERE grade = 10
+  ORDER BY students.id
+  LIMIT ?
+SQL
+
+DB[:conn].execute(sql, x).map do |row|
+  self.new_from_db(row)
+end
+end
+
+def self.first_student_in_grade_10
+  sql = <<-SQL
+  SELECT *
+  FROM students
+  WHERE grade = 10
+  ORDER BY students.id
+  LIMIT 1
+SQL
+
+DB[:conn].execute(sql).map do |row|
+  self.new_from_db(row)
+end.first
+end
+
+def self.all_students_in_grade_X(grade)
+  sql = <<-SQL
+    SELECT *
+    FROM students
+    WHERE grade = ?
+    ORDER BY students.id
+  SQL
+
+  DB[:conn].execute(sql, grade).map do |row|
+    self.new_from_db(row)
+  end
+end
+
+end
