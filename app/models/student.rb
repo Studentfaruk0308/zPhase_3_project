@@ -34,9 +34,20 @@ class Student < ActiveRecord::Base
   def list_all_students
     return "Student Code: " + self.student_code + " / Student Name: " + self.student_name + " / Email ID: " + self.email_id + " / Name of Parent: " + self.parent_name + " / Mobile Number: " + self.mobile_number
 
-    # return [(self.student_code), (self.student_name), (self.email_id), (self.parent_name), (self.mobile_number)].join"\ / "
   end
-
+  # t.string "student_code"
+  # t.string "student_name"
+  # t.string "date_of_birth"
+  # t.string "email_id"
+  # t.string "home_address"
+  # t.string "parent_name"
+  # t.string "mobile_number"
+  # t.string "gender"
+  # t.string "sibling"
+  # t.string "enrolled_date"
+  # t.integer "teacher_id"
+  # t.integer "grade_id"
+  # t.integer "tuitionFee_id"
     
 end
 

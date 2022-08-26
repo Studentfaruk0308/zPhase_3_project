@@ -2,10 +2,10 @@
 
 class CreateSalaryPayments < ActiveRecord::Migration[6.0]
     def change
-      create_table :salaryPayments do |t|
+      create_table :salary_payments do |t|
         t.string :salary_payment_code
         t.integer :teacher_id
-        t.date :date_of_payment
+        t.string :date_of_payment
         t.float :amount_of_payment
         t.timestamps
       end

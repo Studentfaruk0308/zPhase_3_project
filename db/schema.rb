@@ -12,11 +12,11 @@
 
 ActiveRecord::Schema.define(version: 8) do
 
-  create_table "feePayments", force: :cascade do |t|
+  create_table "fee_payments", force: :cascade do |t|
     t.string "fee_payment_code"
     t.integer "student_id"
     t.integer "grade_id"
-    t.date "date_of_payment"
+    t.string "date_of_payment"
     t.float "amount_of_payment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 8) do
     t.string "snow"
     t.string "visibility"
     t.string "station_code"
-    t.datetime "date_time_forecast"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -50,10 +49,10 @@ ActiveRecord::Schema.define(version: 8) do
     t.float "fortnightly_salary"
   end
 
-  create_table "salaryPayments", force: :cascade do |t|
+  create_table "salary_payments", force: :cascade do |t|
     t.string "salary_payment_code"
     t.integer "teacher_id"
-    t.date "date_of_payment"
+    t.string "date_of_payment"
     t.float "amount_of_payment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -62,14 +61,14 @@ ActiveRecord::Schema.define(version: 8) do
   create_table "students", force: :cascade do |t|
     t.string "student_code"
     t.string "student_name"
-    t.date "date_of_birth"
+    t.string "date_of_birth"
     t.string "email_id"
     t.string "home_address"
     t.string "parent_name"
     t.string "mobile_number"
     t.string "gender"
-    t.boolean "sibling"
-    t.date "enrolled_date"
+    t.string "sibling"
+    t.string "enrolled_date"
     t.integer "teacher_id"
     t.integer "grade_id"
     t.integer "tuitionFee_id"
@@ -84,14 +83,14 @@ ActiveRecord::Schema.define(version: 8) do
     t.string "home_address"
     t.string "mobile_number"
     t.string "gender"
-    t.date "engagement_date"
+    t.string "engagement_date"
     t.string "bank_details"
     t.integer "salary_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "tuitionFees", force: :cascade do |t|
+  create_table "tuition_fees", force: :cascade do |t|
     t.string "fee_code"
     t.float "term_1_fee"
     t.float "term_2_fee"

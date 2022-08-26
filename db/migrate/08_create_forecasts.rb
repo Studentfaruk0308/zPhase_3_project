@@ -13,7 +13,6 @@ class CreateForecasts < ActiveRecord::Migration[6.0]
         t.string :snow
         t.string :visibility
         t.string :station_code
-        t.datetime :date_time_forecast
         t.timestamps
       end
     end

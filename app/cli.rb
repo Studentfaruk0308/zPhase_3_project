@@ -81,7 +81,7 @@ class CLI
         puts "Please type the Name of new Student"
         new_student_name = gets.strip
 
-        puts "Please type the date of birth of new Student i.e. 01-01-2022"
+        puts "Please type the date of birth of new Student i.e. 01-01-2010"
         new_student_dob = gets.strip
 
         puts "Please type the email id of new Student"
@@ -170,7 +170,7 @@ class CLI
         puts "Please type the gender of the Student"
         update_student_gender = gets.strip
 
-        puts "Please type TRUE or FALSE if student has sibling in the school"
+        puts "Please type YES or NO if student has sibling in the school"
         update_student_sibling = gets.strip
 
         puts "Please type the new date of enrolment ie 01-01-2022"
@@ -483,7 +483,7 @@ class CLI
         when '1'
             new_tuition_fee_entry_menu
         when '2'
-            Tuitionfee.all.each do |fee|
+            TuitionFee.all.each do |fee|
                 puts fee.list_all_tuition_fees
             end
         when '3'
@@ -517,7 +517,7 @@ class CLI
         puts "Please type the Full Year Fee"
         new_full_year_fee = gets.strip
 
-        Tuitionfee.create(
+        TuitionFee.create(
             fee_code: new_fee_code,
             term_1_fee: new_term_1_fee,
             term_2_fee: new_term_2_fee,
@@ -553,7 +553,7 @@ class CLI
         puts "Please type the Full Year Fee"
         update_full_year_fee = gets.strip
 
-        Tuitionfee.update(
+        TuitionFee.update(
             fee_code: update_fee_code,
             term_1_fee: update_term_1_fee,
             term_2_fee: update_term_2_fee,
@@ -581,6 +581,98 @@ class CLI
 
     end
 
+    def salaryMenu
+
+        puts "What would you like to do?"
+        puts "Select one of the following options from 1 to 4"
+        puts "1. Create a new Salary Category"
+        puts "2. List All Salary Categories"
+        puts "3. Update a Salary Category"
+        puts "4. Delete a Salary Category from Database"
+
+        input = gets.strip
+
+        case input
+        when '1'
+            new_salary_entry_menu
+        when '2'
+            Salary.all.each do |amount|
+                puts amount.list_all_salaries
+            end
+        when '3'
+            update_a_salary_menu
+        when '4'
+            delete_a_salary_menu
+        end            
+    end
+
+    def new_salary_entry_menu
+
+        puts "Creating a new Salary Category in Database"
+        puts ""
+        puts "Please type the details of new Salary as asked in sequence"
+        puts ""
+        puts "Please type the Code for new Salary"
+        new_salary_code = gets.strip
+
+        puts "Please type the amount of fortnightly Salary"
+        new_fortnightly_salary = gets.strip
+
+        Salary.create(
+            salary_code: new_salary_code,
+            fortnightly_salary: new_fortnightly_salary
+        )
+
+        puts "A new Salary Category created with the data you have provided"
+        puts "Thank You"
+    end
+
+    def update_a_salary_menu
+        puts "Updating a Salary Category in the Database"
+        puts ""
+        puts "Please type the details of Salary Category that to be updated as asked in sequence"
+        puts ""
+        puts "Please type the Salary ID for the Salary that to be updated"
+        update_salary_id = gets.strip
+
+
+
+        update_salary = Salary.find_by(id: update_salary_id)
+        puts "Salary with ID #{update_salary_id} will be updated in next few steps"
+
+        puts "Please type the new code of the Salary"
+        update_salary_code = gets.strip
+
+        puts "Please type the amount of fortnightly Salary"
+        update_fortnightly_salary = gets.strip
+
+        update_salary.update(
+            salary_code: update_salary_code,
+            fortnightly_salary: update_fortnightly_salary
+        )
+
+        puts "Salary with code #{update_salary_code} updated in the Database"
+        puts "Thank You"
+    end
+
+
+    def delete_a_salary_menu
+        puts "Deleting a Salary Category from Database"
+        puts ""
+        
+        puts "Please type the salary category id which to be deleted from Database"
+        delete_salary_id = gets.strip
+
+        delete_salary = Salary.find_by(id: delete_salary_id)
+        delete_salary.destroy
+
+        puts "Salary Category with id #{delete_salary_id} deleted from the Database"
+
+    end
+
+
+
+
     def weatherForecastMenu
 
         puts "What would you like to do?"
@@ -603,40 +695,23 @@ class CLI
     def latest_forecast
         updates = JSON.parse(GetWeather.new.getWeather)
 
+        # puts updates
+
         latestForecast = updates['data'][0] 
             Forecast.create(
-                precipitation: latestForecast['precip'],
+                # precipitation: latestForecast['precip'],
                 uv_radiation: latestForecast['uv'],
                 solar_radiation: latestForecast['solar_rad'],
                 temperature: latestForecast['temp'],
                 wind_direction: latestForecast['wind_cdir_full'],
                 wind_speed: latestForecast['wind_spd'],
                 clouds: latestForecast['clouds'],
-                snow: latestForecast['snow'],
+                # snow: latestForecast['snow'],
                 visibility: latestForecast['vis'],
-                station_code: latestForecast['station'],
-                date_time_forecast: DateTime.now
+                station_code: latestForecast['station']
                 )
 
         puts Forecast.last.display_forecast
     end
 
 end
-
-
-    #   t.string :precipitation
-    #   t.string :uv_radiation
-    #   t.string :solar_radiation
-    #   t.string :temperature
-    #   t.string :wind_direction
-    #   t.string :wind_speed
-    #   t.string :clouds
-    #   t.string :snow
-    #   t.string :visibility
-    #   t.string :station_code
-    #   t.datetime :date_time_forecast
-
-        # programs = GetPrograms.new.program_school
-        #     programs.each do |program|
-        #     User.create({name: program})
-        #     end  

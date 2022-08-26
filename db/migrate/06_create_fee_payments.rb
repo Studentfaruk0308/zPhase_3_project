@@ -2,11 +2,11 @@
 
 class CreateFeePayments < ActiveRecord::Migration[6.0]
     def change
-      create_table :feePayments do |t|
+      create_table :fee_payments do |t|
         t.string :fee_payment_code
         t.integer :student_id
         t.integer :grade_id
-        t.date :date_of_payment
+        t.string :date_of_payment
         t.float :amount_of_payment
         t.timestamps
       end

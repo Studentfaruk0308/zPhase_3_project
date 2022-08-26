@@ -5,14 +5,14 @@ class CreateStudents < ActiveRecord::Migration[6.0]
       create_table :students do |t|
         t.string :student_code
         t.string :student_name
-        t.date :date_of_birth
+        t.string :date_of_birth
         t.string :email_id
         t.string :home_address
         t.string :parent_name
         t.string :mobile_number
         t.string :gender
-        t.boolean :sibling
-        t.date :enrolled_date
+        t.string :sibling
+        t.string :enrolled_date
         t.integer :teacher_id
         t.integer :grade_id
         t.integer :tuitionFee_id

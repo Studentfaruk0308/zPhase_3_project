@@ -1,4 +1,4 @@
-class Tuitionfee < ActiveRecord::Base
+class TuitionFee < ActiveRecord::Base
     has_many :students
     has_many :grades
 
@@ -21,6 +21,13 @@ class Tuitionfee < ActiveRecord::Base
       return "Fee Code: " + self.fee_code + " / Term 1 Fee: " + self.term_1_fee.to_s + " / Term 2 Fee: " + self.term_2_fee.to_s + " / Term 3 Fee: " + self.term_3_fee.to_s + " / Term 4 Fee: " + self.term_4_fee.to_s + " / Full Year Fee: " + self.full_year_fee.to_s
 
     end
+
+    # t.string "fee_code"
+    # t.float "term_1_fee"
+    # t.float "term_2_fee"
+    # t.float "term_3_fee"
+    # t.float "term_4_fee"
+    # t.float "full_year_fee"
 
 end
 

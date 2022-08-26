@@ -9,7 +9,7 @@ class CreateTeachers < ActiveRecord::Migration[6.0]
         t.string :home_address
         t.string :mobile_number
         t.string :gender
-        t.date :engagement_date
+        t.string :engagement_date
         t.string :bank_details
         t.integer :salary_id
         t.timestamps

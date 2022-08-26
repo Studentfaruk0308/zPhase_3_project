@@ -2,7 +2,7 @@
 
 class CreateTuitionFees < ActiveRecord::Migration[6.0]
     def change
-      create_table :tuitionFees do |t|
+      create_table :tuition_fees do |t|
         t.string :fee_code
         t.float :term_1_fee
         t.float :term_2_fee

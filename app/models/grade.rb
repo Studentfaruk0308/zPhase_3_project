@@ -18,4 +18,9 @@ class Grade < ActiveRecord::Base
       return "Grade Code: " + self.grade_code + " / Grade Name: " + self.grade_name + " / Grade Gender: " + self.grade_gender + " / Grade Teacher ID: " + self.teacher_id.to_s
     end
 
+    # t.string "grade_code"
+    # t.string "grade_name"
+    # t.string "grade_gender"
+    # t.integer "teacher_id"
+
   end
