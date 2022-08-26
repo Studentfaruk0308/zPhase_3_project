@@ -15,13 +15,7 @@ class Grade < ActiveRecord::Base
     # end
 
     def list_all_grades
-      # return an array of strings containing every student's data
-      self.grades.each do |grade|
-        grade.grade_code
-        grade.grade_name
-        grade.grade_gender
-        grade.teacher_id
-      end
+      return "Grade Code: " + self.grade_code + " / Grade Name: " + self.grade_name + " / Grade Gender: " + self.grade_gender + " / Grade Teacher ID: " + self.teacher_id.to_s
     end
 
   end

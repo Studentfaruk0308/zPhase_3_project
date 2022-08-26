@@ -16,14 +16,7 @@ class Feepayment < ActiveRecord::Base
     # end
 
     def list_all_feePayments
-      # return an array of strings containing every student's data
-      self.feePayments.each do |fee|
-        fee.fee_payment_code
-        fee.student_id
-        fee.grade_id
-        fee.date_of_payment
-        fee.amount_of_payment
-      end
+      return "Fee Payment Code: " + self.fee_payment_code + " / Student ID: " + self.student_id + " / Grade ID: " + self.grade_id + " / Date of Payment: " + self.date_of_payment + " / Amount of Payment: " + self.amount_of_payment
     end
 
 end

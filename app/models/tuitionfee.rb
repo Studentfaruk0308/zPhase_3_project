@@ -17,16 +17,8 @@ class Tuitionfee < ActiveRecord::Base
     #   @full_year_fee = full_year_fee
     # end
 
-    def list_all_fees
-      # return an array of strings containing every student's data
-      self.fees.each do |fee|
-        fee.fee_code
-        fee.term_1_fee
-        fee.term_2_fee
-        fee.term_3_fee
-        fee.term_4_fee
-        fee.full_year_fee
-      end
+    def list_all_tuition_fees
+      return "Fee Code: " + self.fee_code + " / Term 1 Fee: " + self.term_1_fee.to_s + " / Term 2 Fee: " + self.term_2_fee.to_s + " / Term 3 Fee: " + self.term_3_fee.to_s + " / Term 4 Fee: " + self.term_4_fee.to_s + " / Full Year Fee: " + self.full_year_fee.to_s
 
     end
 

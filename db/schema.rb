@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 7) do
+ActiveRecord::Schema.define(version: 8) do
 
   create_table "feePayments", force: :cascade do |t|
     t.string "fee_payment_code"
@@ -18,6 +18,22 @@ ActiveRecord::Schema.define(version: 7) do
     t.integer "grade_id"
     t.date "date_of_payment"
     t.float "amount_of_payment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "forecasts", force: :cascade do |t|
+    t.string "precipitation"
+    t.string "uv_radiation"
+    t.string "solar_radiation"
+    t.string "temperature"
+    t.string "wind_direction"
+    t.string "wind_speed"
+    t.string "clouds"
+    t.string "snow"
+    t.string "visibility"
+    t.string "station_code"
+    t.datetime "date_time_forecast"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

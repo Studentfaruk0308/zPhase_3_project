@@ -12,11 +12,7 @@ class Salary < ActiveRecord::Base
     # end
 
     def list_all_salaries
-      # return an array of strings containing every student's data
-      self.salaries.each do |salary|
-        salary.salary_code
-        salary.fortnightly_salary
-      end
+      return "Salary Code: " + self.salary_code + " / Forthnightly Salary: " + self.fortnightly_salary
     end
 
 end

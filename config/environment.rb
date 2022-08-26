@@ -13,6 +13,7 @@ ActiveRecord::Base.establish_connection(
 
 require_all 'app/models'
 require_relative "../app/cli"
+require_relative "../lib/getWeatherByAPI"
 
 # ActiveRecord::Base.establish_connection(
 #     :adapter => "sqlite3",

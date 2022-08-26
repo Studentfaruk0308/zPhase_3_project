@@ -31,25 +31,13 @@ class Student < ActiveRecord::Base
 
 
 
-    def list_all_students
-        # return an array of strings containing every student's data
-        self.students.each do |student|
-          student.student_code
-          student.student_name
-          student.date_of_birth
-          student.email_id
-          student.home_address
-          student.parent_name
-          student.mobile_number
-          student.gender
-          student.sibling
-          student.enrolled_date
-          student.teacher_id
-          student.grade_id
-          student.tuitionfee_id
-        end
-    end
+  def list_all_students
+    return "Student Code: " + self.student_code + " / Student Name: " + self.student_name + " / Email ID: " + self.email_id + " / Name of Parent: " + self.parent_name + " / Mobile Number: " + self.mobile_number
 
+    # return [(self.student_code), (self.student_name), (self.email_id), (self.parent_name), (self.mobile_number)].join"\ / "
   end
+
+    
+end
 
   

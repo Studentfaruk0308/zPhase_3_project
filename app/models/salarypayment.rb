@@ -14,12 +14,6 @@ class Salarypayment < ActiveRecord::Base
     # end
 
     def list_all_salaryPayments
-      # return an array of strings containing every student's data
-      self.salaryPayments.each do |salary|
-        salary.salary_payment_code
-        salary.teacher_id
-        salary.date_of_payment
-        salary.amount_of_payment
-      end
+      return "Salary Payment Code: " + self.salary_payment_code + " / Teacher ID: " + self.teacher_id + " / Date of Payment: " + self.date_of_payment + " / Amount Paid: " + self.amount_of_payment
     end
 end

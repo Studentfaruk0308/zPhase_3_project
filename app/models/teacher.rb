@@ -22,18 +22,8 @@ class Teacher < ActiveRecord::Base
     # end
 
     def list_all_teachers
-      # return an array of strings containing every student's data
-      self.teachers.each do |teacher|
-        teacher.teacher_code
-        teacher.teacher_name
-        teacher.email_id
-        teacher.home_address
-        teacher.mobile_number
-        teacher.gender
-        teacher.engagement_date
-        teacher.bank_details
-        teacher.salary_id
-      end
+      return "Teacher Code: " + self.teacher_code + " / Teacher Name: " + self.teacher_name + " / Email ID: " + self.email_id + " /Home Address: " + self.home_address + "/ Mobile Number: " + self.mobile_number + " / Engagement Date: " + self.engagement_date.to_s + " / Bank Details: " + self.bank_details + " / Salary ID: " + self.salary_id.to_s
+    
     end
 
 end
