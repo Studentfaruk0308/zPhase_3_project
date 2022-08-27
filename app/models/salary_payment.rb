@@ -14,7 +14,7 @@ class SalaryPayment < ActiveRecord::Base
     # end
 
     def list_all_salaryPayments
-      return "Salary Payment Code: " + self.salary_payment_code + " / Teacher ID: " + self.teacher_id + " / Date of Payment: " + self.date_of_payment + " / Amount Paid: " + self.amount_of_payment
+      return "Salary Payment Code: " + self.salary_payment_code + " / Teacher ID: " + self.teacher_id.to_s + " / Date of Payment: " + self.date_of_payment + " / Amount Paid: " + self.amount_of_payment.to_s
     end
 
     # t.string "salary_payment_code"

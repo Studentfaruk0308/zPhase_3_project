@@ -16,7 +16,7 @@ class FeePayment < ActiveRecord::Base
     # end
 
     def list_all_feePayments
-      return "Fee Payment Code: " + self.fee_payment_code + " / Student ID: " + self.student_id + " / Grade ID: " + self.grade_id + " / Date of Payment: " + self.date_of_payment + " / Amount of Payment: " + self.amount_of_payment
+      return "Fee Payment Code: " + self.fee_payment_code + " / Student ID: " + self.student_id.to_s + " / Grade ID: " + self.grade_id.to_s + " / Date of Payment: " + self.date_of_payment + " / Amount of Payment: " + self.amount_of_payment.to_s
     end
 
 end

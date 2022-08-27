@@ -40,6 +40,8 @@ class CLI
      end
     end
 
+# STUDENT MENU
+
     def studentMenu
         puts "What would you like to do?"
         puts "Select one of the following options from 1 to 5"
@@ -58,7 +60,6 @@ class CLI
             Student.all.each do |student|
                puts student.list_all_students
             end
-        
         when '3'
             update_student_menu
         when '4'
@@ -218,6 +219,155 @@ class CLI
 
     end
 
+# TEACHER MENU
+
+    def teacherMenu
+        puts "What would you like to do?"
+        puts "Select one of the following options from 1 to 5"
+        puts "1. Create a Teacher Data"
+        puts "2. List All Teachers"
+        puts "3. Update a Teacher Data"
+        puts "4. Delete a Teacher Data"
+        puts "5. Total Number of Teachers"
+
+        input = gets.strip
+
+        case input
+        when '1'
+            new_teacher_entry_menu
+        when '2'
+            Teacher.all.each do |teacher|
+                puts teacher.list_all_teachers
+            end
+        when '3'
+            update_a_teacher_menu
+        when '4'
+            delete_a_teacher_menu
+        when '5'
+            puts "There are total #{Teacher.count} Teachers in the Database"   
+        end
+
+    end
+
+    def new_teacher_entry_menu
+
+        puts "Creating a new Teacher in Database"
+        puts ""
+        puts "Please type the particulars of new Teacher as asked in sequence"
+        puts ""
+        puts "Please type the Code for new Teacher"
+        new_teacher_code = gets.strip
+
+        puts "Please type the Name of new Teacher"
+        new_teacher_name = gets.strip
+
+        puts "Please type the Email ID of new Teacher"
+        new_teacher_email_id = gets.strip
+
+        puts "Please type the home address of new 
+        Teacher"
+        new_teacher_home_address = gets.strip
+
+        puts "Please type the mobile number of new Teacher"
+        new_teacher_mobile_number = gets.strip
+
+        puts "Please type the gender of new Teacher"
+        new_teacher_gender = gets.strip
+
+        puts "Please type the engagement date of new Teacher"
+        new_teacher_engagement_date = gets.strip
+
+        puts "Please type the bank details of new Teacher"
+        new_teacher_bank_details = gets.strip
+
+        puts "Please type the salary ID of new Teacher"
+        new_teacher_salary_id = gets.strip
+
+        Teacher.create(
+            teacher_code: new_teacher_code,
+            teacher_name: new_teacher_name,
+            email_id: new_teacher_email_id,
+            home_address: new_teacher_home_address,
+            mobile_number: new_teacher_mobile_number,
+            gender: new_teacher_gender,
+            engagement_date: new_teacher_engagement_date,
+            bank_details: new_teacher_bank_details,
+            salary_id: new_teacher_salary_id
+        )
+
+        puts "A new Teacher created with the data you have provided"
+        puts "Thank You"
+    end
+
+    def update_a_teacher_menu
+        puts "Updating a Teacher in the Database"
+        puts ""
+        
+        puts "Please type the Teacher id which to be updated"
+        update_teacher_id = gets.strip
+
+        update_teacher = Teacher.find_by(id: update_teacher_id)
+        puts "Teacher #{update_teacher_id} will be updated in next few steps"
+
+        puts "Please type the new Code of the Teacher"
+        update_teacher_code = gets.strip
+
+        puts "Please type the new Name of the Teacher"
+        update_teacher_name = gets.strip
+
+        puts "Please type the new Email ID of the Teacher"
+        update_teacher_email_id = gets.strip
+
+        puts "Please type the new home address of the
+        Teacher"
+        update_teacher_home_address = gets.strip
+
+        puts "Please type the new mobile number of the Teacher"
+        update_teacher_mobile_number = gets.strip
+
+        puts "Please input the correct gender of the Teacher"
+        update_teacher_gender = gets.strip
+
+        puts "Please type the new engagement date of the Teacher"
+        update_teacher_engagement_date = gets.strip
+
+        puts "Please type the new bank details of the Teacher"
+        update_teacher_bank_details = gets.strip
+
+        puts "Please type the new salary ID of the Teacher"
+        update_teacher_salary_id = gets.strip
+
+        update_teacher.update(
+            teacher_code: update_teacher_code,
+            teacher_name: update_teacher_name,
+            email_id: update_teacher_email_id,
+            home_address: update_teacher_home_address,
+            mobile_number: update_teacher_mobile_number,
+            gender: update_teacher_gender,
+            engagement_date: update_teacher_engagement_date,
+            bank_details: update_teacher_bank_details,
+            salary_id: update_teacher_salary_id
+        )
+
+        puts "Teacher with id #{update_teacher_id} updated in the Database"
+    end
+
+    def delete_a_teacher_menu
+        puts "Deleting a Teacher from Database"
+        puts ""
+        
+        puts "Please type the Teacher id which to be deleted from Database"
+        delete_teacher_id = gets.strip
+
+        delete_Teacher = Teacher.find_by(id: delete_teacher_id)
+        delete_Teacher.destroy
+
+        puts "Teacher with id #{delete_teacher_id} deleted from the Database"
+
+    end
+
+# GRADE MENU
+
     def gradeMenu
 
         puts "What would you like to do?"
@@ -322,151 +472,7 @@ class CLI
 
     end
 
-
-    def teacherMenu
-        puts "What would you like to do?"
-        puts "Select one of the following options from 1 to 5"
-        puts "1. Create a Teacher Data"
-        puts "2. List All Teachers"
-        puts "3. Update a Teacher Data"
-        puts "4. Delete a Teacher Data"
-        puts "5. Total Number of Teachers"
-
-        input = gets.strip
-
-        case input
-        when '1'
-            new_teacher_entry_menu
-        when '2'
-            Teacher.all.each do |teacher|
-                puts teacher.list_all_teachers
-            end
-        when '3'
-            update_teacher_menu
-        when '4'
-            delete_a_teacher_menu
-        when '5'
-            puts "There are total #{Teacher.count} Teachers in the Database"   
-        end
-
-    end
-
-    def new_teacher_entry_menu
-
-        puts "Creating a new Teacher in Database"
-        puts ""
-        puts "Please type the particulars of new Teacher as asked in sequence"
-        puts ""
-        puts "Please type the Code for new Teacher"
-        new_teacher_code = gets.strip
-
-        puts "Please type the Name of new Teacher"
-        new_teacher_name = gets.strip
-
-        puts "Please type the Email ID of new Teacher"
-        new_teacher_email_id = gets.strip
-
-        puts "Please type the home address of new 
-        Teacher"
-        new_teacher_home_address = gets.strip
-
-        puts "Please type the mobile number of new Teacher"
-        new_teacher_mobile_number = gets.strip
-
-        puts "Please type the gender of new Teacher"
-        new_teacher_gender = gets.strip
-
-        puts "Please type the engagement date of new Teacher"
-        new_teacher_engagement_date = gets.strip
-
-        puts "Please type the bank details of new Teacher"
-        new_teacher_bank_details = gets.strip
-
-        puts "Please type the salary ID of new Teacher"
-        new_teacher_salary_id = gets.strip
-
-        Teacher.create(
-            teacher_code: new_teacher_code,
-            teacher_name: new_teacher_name,
-            email_id: new_teacher_email_id,
-            home_address: new_teacher_home_address,
-            mobile_number: new_teacher_mobile_number,
-            gender: new_teacher_gender,
-            engagement_date: new_teacher_engagement_date,
-            bank_details: new_teacher_bank_details,
-            salary_id: new_teacher_salary_id
-        )
-
-        puts "A new Teacher created with the data you have provided"
-        puts "Thank You"
-    end
-
-    def update_a_teacher_menu
-        puts "Updating a Teacher in the Database"
-        puts ""
-        
-        puts "Please type the Teacher id which to be updated"
-        update_teacher_id = gets.strip
-
-        update_teacher = Teacher.find_by(id: update_teacher_id)
-        puts "Teacher #{update_teacher_id} will be updated in next few steps"
-
-        puts "Please type the new Code of the Teacher"
-        update_teacher_code = gets.strip
-
-        puts "Please type the new Name of the Teacher"
-        update_teacher_name = gets.strip
-
-        puts "Please type the new Email ID of the Teacher"
-        update_teacher_email_id = gets.strip
-
-        puts "Please type the new home address of the
-        Teacher"
-        update_teacher_home_address = gets.strip
-
-        puts "Please type the new mobile number of the Teacher"
-        update_teacher_mobile_number = gets.strip
-
-        puts "Please input the correct gender of the Teacher"
-        update_teacher_gender = gets.strip
-
-        puts "Please type the new engagement date of the Teacher"
-        update_teacher_engagement_date = gets.strip
-
-        puts "Please type the new bank details of the Teacher"
-        update_teacher_bank_details = gets.strip
-
-        puts "Please type the new salary ID of the Teacher"
-        update_teacher_salary_id = gets.strip
-
-        Teacher.update(
-            teacher_code: update_teacher_code,
-            teacher_name: update_teacher_name,
-            email_id: update_teacher_email_id,
-            home_address: update_teacher_home_address,
-            mobile_number: update_teacher_mobile_number,
-            gender: update_teacher_gender,
-            engagement_date: update_teacher_engagement_date,
-            bank_details: update_teacher_bank_details,
-            salary_id: update_teacher_salary_id
-        )
-
-        puts "Teacher with id #{update_teacher_id} updated in the Database"
-    end
-
-    def delete_a_teacher_menu
-        puts "Deleting a Teacher from Database"
-        puts ""
-        
-        puts "Please type the Teacher id which to be deleted from Database"
-        delete_teacher_id = gets.strip
-
-        delete_Teacher = Teacher.find_by(id: delete_teacher_id)
-        delete_Teacher.destroy
-
-        puts "Teacher with id #{delete_teacher_id} deleted from the Database"
-
-    end
+# TUITION FEE MENU
     
     def tuitionFeeMenu
 
@@ -533,10 +539,16 @@ class CLI
     def update_a_tuition_fee_menu
         puts "Updating a Tuition Fee in the Database"
         puts ""
-        puts "Please type the details of Tuition that to be updated Fee as asked in sequence"
+        puts "Please type the details of Tuition that to be updated as asked in sequence"
         puts ""
+        puts "Please type the Tuition Fee ID that to be updated"
+        update_tuition_fee_id = gets.strip
+
+        update_tuition_fee = TuitionFee.find_by(id: update_tuition_fee_id)
+        puts "Tuition Fee with ID #{update_tuition_fee_id} will be updated in next few steps"
+       
         puts "Please type the Code for the Tuition Fee that to be updated"
-        update_fee_code = gets.strip
+        update_tuition_fee_code = gets.strip
 
         puts "Please type the Term 1 Fee"
         update_term_1_fee = gets.strip
@@ -553,8 +565,8 @@ class CLI
         puts "Please type the Full Year Fee"
         update_full_year_fee = gets.strip
 
-        TuitionFee.update(
-            fee_code: update_fee_code,
+        update_tuition_fee.update(
+            fee_code: update_tuition_fee_code,
             term_1_fee: update_term_1_fee,
             term_2_fee: update_term_2_fee,
             term_3_fee: update_term_3_fee,
@@ -562,7 +574,7 @@ class CLI
             full_year_fee: update_full_year_fee
         )
 
-        puts "Tuition Fee with code #{update_fee_code} updated in the Database"
+        puts "Tuition Fee with ID #{update_tuition_fee_id} updated in the Database"
         puts "Thank You"
     end
 
@@ -580,6 +592,8 @@ class CLI
         puts "Tuition Fee with id #{delete_tuitionFee_id} deleted from the Database"
 
     end
+
+# SALARY MENU
 
     def salaryMenu
 
@@ -635,8 +649,6 @@ class CLI
         puts "Please type the Salary ID for the Salary that to be updated"
         update_salary_id = gets.strip
 
-
-
         update_salary = Salary.find_by(id: update_salary_id)
         puts "Salary with ID #{update_salary_id} will be updated in next few steps"
 
@@ -651,7 +663,7 @@ class CLI
             fortnightly_salary: update_fortnightly_salary
         )
 
-        puts "Salary with code #{update_salary_code} updated in the Database"
+        puts "Salary with ID #{update_salary_id} updated in the Database"
         puts "Thank You"
     end
 
@@ -670,8 +682,223 @@ class CLI
 
     end
 
+# FEE PAYMENT MENU
 
+def feePaymentMenu
 
+    puts "What would you like to do?"
+    puts "Select one of the following options from 1 to 4"
+    puts "1. Create a new Tuition Fee Payment"
+    puts "2. List All Tuition Fee Payments"
+    puts "3. Update a Tuition Fee Payment in the Database"
+    puts "4. Delete a Tuition Payment from Database"
+
+    input = gets.strip
+
+    case input
+    when '1'
+        new_tuition_fee_payment_menu
+    when '2'
+        FeePayment.all.each do |amount|
+            puts amount.list_all_feePayments
+        end
+    when '3'
+        update_a_tuition_fee_payment
+    when '4'
+        delete_a_tuition_fee_payment
+    end            
+end
+
+def new_tuition_fee_payment_menu
+
+    puts "Creating a new Tuition Fee payment in Database"
+    puts ""
+    puts "Please type the details of new Tuition Fee payment as asked in sequence"
+    puts ""
+    puts "Please type the Fee Payment Code for new Tuition Fee payment"
+    new_tuition_fee_payment_code = gets.strip
+
+    puts "Please type the Student ID for whom Tuition Fee is paid"
+    new_student_id_tuition_fee_payment = gets.strip
+
+    puts "Please type the Grade ID of Student for whom Tuition Fee is paid"
+    new_grade_id_tuition_fee_payment = gets.strip
+
+    puts "Please type the date of payment when Tuition Fee was paid"
+    new_date_of_payment_tuition_fee = gets.strip
+
+    puts "Please type the amount of payment of the Tuition Fee that was paid"
+    new_amount_of_payment_tuition_fee = gets.strip
+
+    FeePayment.create(
+        fee_payment_code: new_tuition_fee_payment_code,
+        student_id: new_student_id_tuition_fee_payment,
+        grade_id: new_grade_id_tuition_fee_payment,
+        date_of_payment: new_date_of_payment_tuition_fee,
+        amount_of_payment: new_amount_of_payment_tuition_fee
+    )
+
+    puts "A new Tuition Fee Payment created with the data you have provided"
+    puts "Thank You"
+end
+
+def update_a_tuition_fee_payment
+    puts "Updating a Tuition Fee Payment in the Database"
+    puts ""
+    puts "Please type the details of Tuition Fee Payment that to be updated as asked in sequence"
+    puts ""
+    puts "Please type the Tuition Fee Payment ID that to be updated"
+    update_tuition_fee_payment_id = gets.strip
+
+    update_tuition_fee_payment = FeePayment.find_by(id: update_tuition_fee_payment_id)
+    puts "Tuition Fee payment with ID #{update_tuition_fee_payment_id} will be updated in next few steps"
+
+    puts "Please type the new code of the Tuition Fee Payment"
+    update_tuition_fee_payment_code = gets.strip
+
+    puts "Please type the Student ID of the Tuition Fee Payment"
+    update_student_id_tuition_fee = gets.strip
+
+    puts "Please type the Grade ID of the Student for the Tuition Fee Payment"
+    update_grade_id_tuition_fee = gets.strip
+
+    puts "Please type the correct date of Tuition Fee Payment"
+    update_date_of_tuition_fee_payment = gets.strip       
+
+    puts "Please type the correct amount of Tuition Fee Payment"
+    update_amount_of_tuition_fee_payment = gets.strip
+
+    update_tuition_fee_payment.update(
+        fee_payment_code: update_tuition_fee_payment_code,
+        student_id: update_student_id_tuition_fee,
+        grade_id: update_grade_id_tuition_fee, 
+        date_of_payment: update_date_of_tuition_fee_payment,
+        amount_of_payment: update_amount_of_tuition_fee_payment
+    )
+
+    puts "Tuition Fee Payment with ID #{update_tuition_fee_payment_id} updated in the Database"
+    puts "Thank You"
+end
+
+def delete_a_tuition_fee_payment
+    puts "Deleting a Tuition Fee Payment from Database"
+    puts ""
+    
+    puts "Please type the Tuition Fee Payment id which to be deleted from Database"
+    delete_tuition_fee_payment_id = gets.strip
+
+    delete_tuition_fee_payment = FeePayment.find_by(id: delete_tuition_fee_payment_id)
+    delete_tuition_fee_payment.destroy
+
+    puts "Tuition Fee Payment with id #{delete_tuition_fee_payment_id} deleted from the Database"
+
+end
+
+# SALARY PAYMENT MENU
+
+    def salaryPaymentMenu
+
+        puts "What would you like to do?"
+        puts "Select one of the following options from 1 to 4"
+        puts "1. Create a new Salary Payment"
+        puts "2. List All Salary Payments"
+        puts "3. Update a Salary Payment in the Database"
+        puts "4. Delete a Salary Payment from Database"
+
+        input = gets.strip
+
+        case input
+        when '1'
+            new_salary_payment_menu
+        when '2'
+            SalaryPayment.all.each do |amount|
+                puts amount.list_all_salaryPayments
+            end
+        when '3'
+            update_a_salary_payment
+        when '4'
+            delete_a_salary_payment
+        end            
+    end
+
+    def new_salary_payment_menu
+
+        puts "Creating a new Salary payment in Database"
+        puts ""
+        puts "Please type the details of new Salary payment as asked in sequence"
+        puts ""
+        puts "Please type the Code for new Salary payment"
+        new_salary_payment_code = gets.strip
+
+        puts "Please type the Teacher ID to whom salary was paid"
+        new_teacher_id_salary = gets.strip
+
+        puts "Please type the date of payment when salary was paid"
+        new_date_of_payment_salary = gets.strip
+
+        puts "Please type the amount of Salary paid"
+        new_amount_of_payment_salary = gets.strip
+
+        SalaryPayment.create(
+            salary_payment_code: new_salary_payment_code,
+            teacher_id: new_teacher_id_salary,
+            date_of_payment: new_date_of_payment_salary,
+            amount_of_payment: new_amount_of_payment_salary
+        )
+
+        puts "A new Salary Payment created with the data you have provided"
+        puts "Thank You"
+    end
+
+    def update_a_salary_payment
+        puts "Updating a Salary Payment in the Database"
+        puts ""
+        puts "Please type the details of Salary Payment that to be updated as asked in sequence"
+        puts ""
+        puts "Please type the Salary Payment ID that to be updated"
+        update_salary_payment_id = gets.strip
+
+        update_salary_payment = SalaryPayment.find_by(id: update_salary_payment_id)
+        puts "Salary payment with ID #{update_salary_payment_id} will be updated in next few steps"
+
+        puts "Please type the new code of the Salary Payment"
+        update_salary_payment_code = gets.strip
+
+        puts "Please type the Teacher ID of the Salary Payment"
+        update_teacher_id_salary = gets.strip
+
+        puts "Please type the correct date of Salary Payment"
+        update_date_of_salary_payment = gets.strip       
+
+        puts "Please type the correct amount of Salary Payment"
+        update_amount_of_salary_payment = gets.strip  
+
+        update_salary_payment.update(
+            salary_payment_code: update_salary_payment_code,
+            teacher_id: update_teacher_id_salary,
+            date_of_payment: update_date_of_salary_payment,
+            amount_of_payment: update_amount_of_salary_payment
+        )
+
+        puts "Salary Payment with ID #{update_salary_payment_id} updated in the Database"
+        puts "Thank You"
+    end
+
+    def delete_a_salary_payment
+        puts "Deleting a Salary Payment from Database"
+        puts ""
+        
+        puts "Please type the Salary Payment id which to be deleted from Database"
+        delete_salary_payment_id = gets.strip
+
+        delete_salary_payment = SalaryPayment.find_by(id: delete_salary_payment_id)
+        delete_salary_payment.destroy
+
+        puts "Salary Payment with id #{delete_salary_payment_id} deleted from the Database"
+
+    end
+
+# WEATHER MENU
 
     def weatherForecastMenu
 
